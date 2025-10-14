@@ -1,0 +1,22 @@
+SIMPLE DOC TRACK
+
+users
+-name
+-email
+-user_type
+-position
+
+
+documents
+-doc_num
+-desc
+-created_by (user_id)
+-rtc_branch
+-upload (multiple)
+
+
+tracking (history)
+-doc_id
+-user from (user_id: kung kanino galing)
+-user_to (user_id: kung kanino pinas a)
+-remarks (optional)
