@@ -16,7 +16,8 @@
             <ul class="nav sidebar-menu flex-column" data-lte-toggle="treeview" role="navigation"
                 aria-label="Main navigation" data-accordion="false" id="navigation">
                 <li class="nav-item">
-                    <a href="{{ URL::to('dashboard') }}" class="nav-link">
+                    <a href="{{ URL::to('dashboard') }}"
+                        class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}">
                         <i class="nav-icon bi bi-speedometer"></i>
                         <p>Dashboard</p>
                     </a>
@@ -24,19 +25,22 @@
                 @if (Auth::user()->user_type == 'admin')
                     <li class="nav-header">ESSENTIALS</li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('admin-office') }}" class="nav-link">
+                        <a href="{{ URL::to('admin-office') }}"
+                            class="nav-link {{ Request::is('admin-office') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-building"></i>
                             <p>Office</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('admin-position') }}" class="nav-link">
+                        <a href="{{ URL::to('admin-position') }}"
+                            class="nav-link {{ Request::is('admin-position') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-people"></i>
                             <p>Position</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('admin-userslist') }}" class="nav-link">
+                        <a href="{{ URL::to('admin-userslist') }}"
+                            class="nav-link {{ Request::is('admin-userslist') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-person-lines-fill"></i>
                             <p>List of Users</p>
                         </a>
@@ -47,37 +51,43 @@
                 @if (Auth::user()->user_type == 'users')
                     <li class="nav-header">LEGAL DOCUMENTS</li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('user-document') }}" class="nav-link">
+                        <a href="{{ URL::to('user-document') }}"
+                            class="nav-link {{ Request::is('user-document') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-file-earmark-text-fill"></i>
                             <p>Documents</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('incoming-documents') }}" class="nav-link">
+                        <a href="{{ URL::to('incoming-documents') }}"
+                            class="nav-link {{ Request::is('incoming-documents') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-arrow-left"></i>
                             <p>Incoming</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('received-documents') }}" class="nav-link">
+                        <a href="{{ URL::to('received-documents') }}"
+                            class="nav-link {{ Request::is('received-documents') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-arrow-down"></i>
                             <p>Received</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('outgoing-documents') }}" class="nav-link">
+                        <a href="{{ URL::to('outgoing-documents') }}"
+                            class="nav-link {{ Request::is('outgoing-documents') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-arrow-right"></i>
                             <p>Outgoing</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('completed-documents') }}" class="nav-link">
+                        <a href="{{ URL::to('completed-documents') }}"
+                            class="nav-link {{ Request::is('completed-documents') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-check-square-fill"></i>
                             <p>Complete</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ URL::to('track-document') }}" class="nav-link">
+                        <a href="{{ URL::to('track-document') }}"
+                            class="nav-link {{ Request::is('track-document') ? 'active' : '' }}">
                             <i class="nav-icon bi bi-search"></i>
                             <p>Track</p>
                         </a>

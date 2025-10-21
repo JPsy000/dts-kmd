@@ -16,7 +16,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Document Encoded</span>
                             <h4 class="info-box-number">
-                                {{ App\Documents::where('office', Auth::user()->office_id)->count() }}
+                                {{ App\Documents::where('office', Auth::user()->office_id)->count() ?? ''}}
                                 <a href="{{ URL::to('user-document') }}" class="stretched-link"
                                     aria-label="View Documents"></a>
                             </h4>
@@ -35,7 +35,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Incoming</span>
                             <h4 class="info-box-number">
-                                {{ App\DocTrack::where('to', Auth::user()->office_id)->where('forward_status', 'Forwarded')->count() }}
+                                {{ App\DocTrack::where('to', Auth::user()->office_id)->where('forward_status', 'Forwarded')->count() ?? '' }}
                             </h4>
 
                             <a href="{{ URL::to('incoming-documents') }}" class="stretched-link"
@@ -59,7 +59,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Outgoing</span>
                             <h4 class="info-box-number">
-                                {{ App\DocTrack::where('from', Auth::user()->office_id)->where('forward_status', 'Forwarded')->where('active_button', 'Enabled')->count() }}
+                                {{ App\DocTrack::where('from', Auth::user()->office_id)->where('forward_status', 'Forwarded')->where('active_button', 'Enabled')->count() ?? '' }}
                             </h4>
                             <a href="{{ URL::to('outgoing-documents') }}" class="stretched-link"
                                 aria-label="View Outgoing"></a>
@@ -78,7 +78,7 @@
                         <div class="info-box-content">
                             <span class="info-box-text">Completed</span>
                             <h4 class="info-box-number">
-                                {{ App\DocTrack::where('from', Auth::user()->office_id)->where('forward_status', 'Completed')->where('active_button', 'Disabled')->count() }}
+                                {{ App\DocTrack::where('from', Auth::user()->office_id)->where('forward_status', 'Completed')->where('active_button', 'Disabled')->count() ?? '' }}
                             </h4>
                             <a href="{{ URL::to('completed-documents') }}" class="stretched-link"
                                 aria-label="View Completed"></a>

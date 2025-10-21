@@ -30,7 +30,7 @@
                     </select>
 
                     <label for="position_name" class="form-label">Position</label>
-                    <select class="form-select" name="position_name" id="position_name" required>
+                    <select class="form-select" name="position_id" id="position_name" required>
                         <option selected disabled>Choose Option</option>
                         <!-- Positions will be loaded here dynamically -->
                     </select>

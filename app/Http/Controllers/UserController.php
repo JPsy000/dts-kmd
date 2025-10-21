@@ -36,7 +36,7 @@ class UserController extends Controller
             $addUser->phone_number = $request->phone_number;
             $addUser->address = $request->address;
             $addUser->office_id = $request->office_id;
-            $addUser->position_name = $request->position_name;
+            $addUser->position_id = $request->position_id;
             $addUser->profile_picture = $request->profile_picture;
             $addUser->email = $request->email;
             $addUser->password = hash::make($request->password);

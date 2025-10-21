@@ -230,10 +230,14 @@
 @if (Session::has('message'))
     <script>
         Swal.fire({
-            icon: "{{ Session::get('icon') }}",
-            title: "{{ Session::get('message') }}",
-            showConfirmButton: false,
-            timer: 1500
+            icon: @json(Session::get('icon')),
+            title: @json(Session::get('message')),
+            @if (Session::get('icon') === 'success')
+                showConfirmButton: false,
+                timer: 1500
+            @else
+                showConfirmButton: true
+            @endif
         });
     </script>
 @endif
@@ -260,7 +264,7 @@
                             '<option selected disabled>Choose Position</option>');
                         $.each(data, function(key, value) {
                             $position.append('<option value="' + value
-                                .position_name + '">' +
+                                .id + '">' +
                                 value.position_name + '</option>');
                         });
                     },
