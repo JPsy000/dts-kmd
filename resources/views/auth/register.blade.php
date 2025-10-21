@@ -101,11 +101,11 @@
                                     class="col-md-4 col-form-label text-md-right">{{ __('Position') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="position_name" type="text"
-                                        class="form-control @error('position_name') is-invalid @enderror" name="position_name"
-                                        value="{{ old('position_name') }}" autocomplete="name" autofocus>
+                                    <input id="position_id" type="text"
+                                        class="form-control @error('position_id') is-invalid @enderror" name="position_id"
+                                        value="{{ old('position_id') }}" autocomplete="name" autofocus>
 
-                                    @error('position_name')
+                                    @error('position_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -49,7 +49,7 @@
                             </div>
                             <div class="card-footer">
                                 <a href="{{ URL::to('user-document') }}" class="btn btn-danger">Back</a>
-                                <a href="#" class="btn btn-success">Track</a>
+                                <a href="{{ URL::to('track-document') }}" class="btn btn-success">Track</a>
                             </div>
                         </form>
                     </div>

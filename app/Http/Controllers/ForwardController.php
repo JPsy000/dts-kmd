@@ -30,14 +30,13 @@ class ForwardController extends Controller
             $forwardDoc->from = $request->from;
             $forwardDoc->encoded_by = Auth::user()->id;
             $forwardDoc->to = $request->to;
-            $forwardDoc->afterForward = $request->to;
             $forwardDoc->status = $request->status;
             $forwardDoc->forward_status = $request->forwardstatus;
-            $forwardDoc->button_cue = $request->button_cue;
+            $forwardDoc->active_button = 'Enabled';
 
             $forwardDoc->save();
 
-            $forwardStatus = Documents::where('dms_no', $request->dms_no)->first();
+            $forwardStatus = Documents::where('id', $request->dms_no)->first();
 
             if ($forwardStatus) {
                 $forwardStatus->status = $request->forwardstatus;   

@@ -16,8 +16,8 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label class="form-label">DMS No.</label>
-                                    <input type="text" class="form-control" name="dms_no" id="dms_no"
-                                        value="{{ $docForward->dms_no }}" readonly>
+                                    <input type="hidden" name="dms_no" id="dms_no" value="{{ $docForward->id }}">
+                                    <input type="text" class="form-control" value="{{ $docForward->dms_no }}" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Date Released</label>
@@ -47,14 +47,10 @@
                                         <option value="" selected disabled>Select Status</option>
                                         <option value="For Review">For Review</option>
                                         <option value="For Approval">For Approval</option>
-                                        <option value="Approved">Approved</option>
-                                        <option value="Received">Received</option>
-                                        <option value="Revised">Revised</option>
-                                        <option value="Disapproved">Disapproved</option>
+                                        <option value="Filed">Filed</option>
                                     </select>
                                 </div>
                                 <input type="hidden" name="forwardstatus" id="forwardstatus" value="Forwarded">
-                                <input type="hidden" name="button_cue" id="button_cue" value="Received">
                             </div>
                             <div class="card-footer">
                                 <a href="{{ URL::to('user-document') }}" class="btn btn-danger">Back</a>

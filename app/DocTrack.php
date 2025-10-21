@@ -34,7 +34,7 @@ class DocTrack extends Model
 
     public function DocTrack()
     {
-        return $this->hasOne(Documents::class, 'dms_no', 'dms_no');
+        return $this->hasOne(Documents::class, 'id', 'dms_no');
     }
 
     // To view the from column in the incoming documents
@@ -49,13 +49,18 @@ class DocTrack extends Model
         return $this->belongsTo(Offices::class, 'to', 'id');
     }
 
-    public function IncomingOfficeafterReceive()
+    public function DocTracks()
     {
-        return $this->belongsTo(Offices::class, 'afterReceive', 'id');
+        return $this->belongsTo(Documents::class, 'dms_no', 'id');
     }
 
-    public function IncomingOfficeafterForward()
+    public function doc_track()
     {
-        return $this->belongsTo(Offices::class, 'afterForward', 'id');
+        return $this->belongsTo(User::class, 'received_by', 'id');
+    }
+
+    public function doc_track1()
+    {
+        return $this->belongsTo(User::class, 'encoded_by', 'id');
     }
 }

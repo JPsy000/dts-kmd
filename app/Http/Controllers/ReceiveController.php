@@ -25,18 +25,26 @@ class ReceiveController extends Controller
             $forwardDoc->dms_no = $request->dms_no;
             $forwardDoc->date_released = $request->date_released;
             $forwardDoc->remarks = $request->remarks;
-            $forwardDoc->from = $request->from;
+            $forwardDoc->from = Auth::user()->office_id;
             $forwardDoc->encoded_by = Auth::user()->id;
-            $forwardDoc->to = NULL;
-            $forwardDoc->afterReceive = Auth::user()->office_id;
-            $forwardDoc->afterForward = $request->to;
+            $forwardDoc->to = $request->to;
             $forwardDoc->status = $request->status;
-            $forwardDoc->date_received = $request->date_received;
-            $forwardDoc->received_by = $request->received_by;
             $forwardDoc->forward_status = $request->forward_status;
-            $forwardDoc->button_cue = $request->button_cue;
+            $forwardDoc->active_button = 'Enabled';
 
             $forwardDoc->save();
+
+            $updateForwardStatus = DocTrack::where('dms_no', $request->dms_no)
+                ->orderByDesc('id')
+                ->skip(1)
+                ->first();
+
+            if ($updateForwardStatus) {
+
+                $updateForwardStatus->active_button = 'Disabled';
+
+                $updateForwardStatus->save();
+            }
 
             return redirect(URL::to('received-documents'))->with('message', 'Forwarded Successfully!')->with('icon', 'success');
         } catch (\Exception $e) {
@@ -44,22 +52,42 @@ class ReceiveController extends Controller
         }
     }
 
-    public function DocTrackUpdate(Request $request)
+    public function Receive(Request $request)
     {
         try {
-            $updateDocTrack = DocTrack::where('id', $request->doctrack_id)->first();
+            $receiveDoc = new DocTrack();
 
-            $updateDocTrack->date_received = $request->date_received;
-            $updateDocTrack->received_by = $request->received_by;
-            $updateDocTrack->to = $request->to;
-            $updateDocTrack->afterReceive = $request->afterReceive;
-            $updateDocTrack->forward_status = $request->forward_status;
-            $updateDocTrack->button_cue = $request->button_cue;
-            $updateDocTrack->save();
+            $receiveDoc->dms_no = $request->dms_no;
+            $receiveDoc->date_received = $request->date_received;
+            $receiveDoc->from = $request->from;
+            $receiveDoc->encoded_by = $request->encoded_by;
+            $receiveDoc->received_by = Auth::user()->id;
+            $receiveDoc->status = $request->status;
+            $receiveDoc->to = Auth::user()->office_id;
+            $receiveDoc->forward_status = $request->forward_status;
+            $receiveDoc->active_button = 'Enabled';
 
-            return redirect('/incoming-documents')->with('message', 'Document received successfully!')->with('icon', 'success');
+            $receiveDoc->save();
+
+            $updateForwardStatus = DocTrack::where('dms_no', $request->dms_no)
+                ->orderByDesc('id')
+                ->skip(1)
+                ->first();
+
+            if ($updateForwardStatus) {
+
+                $updateForwardStatus->date_received = $request->date_received;
+                $updateForwardStatus->forward_status = $request->forward_status1;
+                $updateForwardStatus->active_button = 'Disabled';
+
+                $updateForwardStatus->save();
+            }
+
+
+
+            return redirect(URL::to('incoming-documents'))->with('message', 'Forwarded Successfully!')->with('icon', 'success');
         } catch (\Exception $e) {
-            return redirect()->back()->with('message', 'Failed to receive document: ' . $e->getMessage())->with('icon', 'error');
+            return redirect()->back()->with('message', 'Failed to forward. ' . $e->getMessage())->with('icon', 'error');
         }
     }
 

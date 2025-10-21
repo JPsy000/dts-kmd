@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocTypeController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ForwardController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\PositionController;
 use App\Http\Controllers\ReceiveController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TrackHistoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,12 +19,13 @@ Route::get('/view', function () {
     return view('users.view');
 });
 
+
 Auth::routes();
 
 // Dashboard Routes
 Route::get('/home', [HomeController::class, 'index']);
-Route::get('/dashboard', [HomeController::class, 'index']);
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 //************ ADMIN SIDE ************//
 
@@ -70,7 +73,7 @@ Route::post('/getDocument', [DocumentController::class, 'getDocument']);
 // To delete the data
 Route::delete('/deleteDocument/{id}', [DocumentController::class, 'destroy']);
 // To view the document
-Route::get('/view-document/{id}', [DocumentController::class, 'viewDocs']);
+Route::get('/view-document/{dms_no}', [DocumentController::class, 'viewDocs']);
 // To select where office to forward the document
 Route::get('/review-document/{id}', [ForwardController::class, 'index']);
 // To forward the document
@@ -81,7 +84,7 @@ Route::get('/received-documents', [GoToController::class, 'goToReceived']);
 Route::get('/incoming-documents', [GoToController::class, 'GoToIncoming']);
 // To receive the document
 Route::get('/receive-document/{id}', [ReceiveController::class, 'index']);
-Route::post('/save-receive', [ReceiveController::class, 'DocTrackUpdate']);
+Route::post('/save-receive', [ReceiveController::class, 'Receive']);
 // To forward the received document
 Route::get('/received-forward/{id}', [ReceiveController::class, 'receivedForward']);
 Route::post('receivedForward-documents', [ReceiveController::class, 'store']);
@@ -93,5 +96,6 @@ Route::get('/completed-documents', [GoToController::class, 'goToComplete']);
 
 // To track the document    
 Route::get('/track-document', [TrackController::class, 'index']);
+Route::get('/track-history/{dms_no}', [TrackController::class, 'TrackHistory']);
 
 //************ USER SIDE ************//

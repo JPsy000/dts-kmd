@@ -45,14 +45,4 @@ class Offices extends Model
         return $this->hasOne(DocTrack::class, 'to', 'id');
     }
 
-    public function IncomingOfficeafterReceive()
-    {
-        return $this->hasOne(DocTrack::class, 'afterReceive', 'id');
-    }
-
-    public function IncomingOfficeafterForward()
-    {
-        return $this->hasOne(DocTrack::class, 'afterForward', 'id');
-    }
-
 }

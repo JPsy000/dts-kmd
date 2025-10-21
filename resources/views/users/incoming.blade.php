@@ -28,15 +28,15 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($docTrack->filter(fn($d) => $d->to == Auth::user()->office_id || $d->afterForward == Auth::user()->office_id)->where('date_received', NULL) as $doc)
+                                                @foreach ($docTrack->where('to', Auth::user()->office_id)->where('forward_status', 'Forwarded') as $doc)
                                                     <tr>
                                                         <td>{{ $doc->DocTrack->dms_no ?? 'N/A' }}</td>
                                                         <td>{{ $doc->DocTrack->case_no ?? 'N/A' }}</td>
                                                         <td>{{ $doc->date_released }}</td>
                                                         <td>{{ $doc->IncomingOffice->office_name ?? 'N/A' }}</td>
                                                         <td>{{ $doc->status }}</td>
-                                                        <td>
-                                                            <a href="{{ URL::to('view-document/' . $doc->DocTrack->id) }}"
+                                                        <td>    
+                                                            <a href="{{ URL::to('view-document/' . $doc->dms_no) }}"
                                                                 class="btn btn-info btn-sm">View</a>
                                                             <a href="{{ URL::to('receive-document/' . $doc->id) }}"
                                                                 class="btn btn-primary btn-sm">Receive</a>

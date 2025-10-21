@@ -15,8 +15,6 @@ class Documents extends Model
         'location',
         'investigator',
         'approver',
-        'date_received',
-        'date_released',
         'subject',
         'file_upload',
         'office',
@@ -31,7 +29,11 @@ class Documents extends Model
 
     public function DocTrack()
     {
-        return $this->belongsTo(DocTrack::class, 'dms_no', 'dms_no');
+        return $this->belongsTo(DocTrack::class, 'id', 'dms_no');
     }
 
+    public function DocTracks()
+    {
+        return $this->hasOne(DocTrack::class, 'dms_no', 'id');
+    }
 }

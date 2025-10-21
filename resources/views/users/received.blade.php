@@ -21,28 +21,29 @@
                                                 <tr>
                                                     <th>DMS No.</th>
                                                     <th>Case No.</th>
-                                                    <th>Date Received</th>
-                                                    <th>From</th>
-                                                    <th>To</th>
                                                     <th>Status</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($docTracks->where('afterForward', Auth::user()->office_id)->where('forward_status', 'Received') as $doc)
+                                                @foreach ($docTracks->where('to', Auth::user()->office_id)->where('forward_status', 'Received')->where('active_button', 'Enabled') as $doc)
                                                     <tr>
                                                         <td>{{ $doc->docTrack->dms_no ?? 'N/A' }}</td>
                                                         <td>{{ $doc->docTrack->case_no ?? 'N/A' }}</td>
-                                                        <td>{{ $doc->date_received }}</td>
-                                                        <td>{{ $doc->IncomingOfficeafterReceive->office_name ?? 'N/A' }}</td>
-                                                        <td>{{ $doc->IncomingOfficeafterForward->office_name ?? 'N/A' }}
-                                                        </td>
                                                         <td>{{ $doc->status }}</td>
                                                         <td>
+                                                            @if ($doc->forward_status == 'Received' && $doc->active_button == 'Enabled')
                                                                 <a href="{{ URL::to('view-document/' . $doc->DocTrack->id) }}"
                                                                     class="btn btn-info btn-sm">View</a>
                                                                 <a href="{{ URL::to('received-forward/' . $doc->DocTrack->id) }}"
                                                                     class="btn btn-primary btn-sm">Forward</a>
+                                                            @else
+                                                                <a href="{{ URL::to('view-document/' . $doc->DocTrack->id) }}"
+                                                                    class="btn btn-info btn-sm">View</a>
+                                                                <a href="{{ URL::to('received-forward/' . $doc->DocTrack->id) }}"
+                                                                    class="btn btn-primary btn-sm disabled"
+                                                                    aria-labelledby="disabled">Forward</a>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

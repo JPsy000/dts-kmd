@@ -27,7 +27,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($docTrack1->where('from', Auth::user()->office_id)->where('forward_status', 'Forwarded') as $doc)
+                                                @foreach ($docTrack1->where('from', Auth::user()->office_id)->where('forward_status', 'Forwarded')->where('active_button', 'Enabled') as $doc)
                                                     <tr>
                                                         <td>{{ $doc->DocTrack->dms_no ?? 'N/A' }}</td>
                                                         <td>{{ $doc->DocTrack->case_no ?? 'N/A' }}</td>

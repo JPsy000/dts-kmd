@@ -17,15 +17,14 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label class="form-label">DMS No.</label>
-                                    <input type="text" class="form-control" name="dms_no" id="dms_no"
-                                        value="{{ $docForwards->dms_no }}" readonly>
+                                    <input type="hidden" name="dms_no" id="dms_no" value="{{ $docForwards->id }}">
+                                    <input type="text" class="form-control" value="{{ $docForwards->dms_no }}" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Date Released</label>
                                     <input type="date" class="form-control" name="date_released" id="date_released"
                                         value="" required>
                                 </div>
-                                <input type="hidden" name="from" id="from" value="{{ auth()->user()->office_id }}">
                                 <div class="mb-3">
                                     <label class="form-label">Remarks</label>
                                     <textarea class="form-control" name="remarks" id="remarks" rows="3"></textarea>
@@ -35,7 +34,8 @@
                                     <select class="form-select" name="to" id="to" required>
                                         <option value="" selected disabled>Select User</option>
                                         @foreach ($office as $offices)
-                                            <option value="{{ $offices->id }}">
+                                            <option value="{{ $offices->id }}"
+                                                @if ($offices->id == auth()->user()->office_id) disabled @endif>
                                                 {{ $offices->office_name }}
                                             </option>
                                         @endforeach
@@ -47,16 +47,14 @@
                                         <option value="" selected disabled>Select Status</option>
                                         <option value="For Review">For Review</option>
                                         <option value="For Approval">For Approval</option>
-                                        <option value="Hold">Hold</option>
                                         <option value="Filed">Filed</option>
                                     </select>
                                 </div>
-                                <input type="date" name="date_received" id="date_received" value="{{ date('Y-m-d') }}"
-                                    disabled hidden>
+                                <input type="date" name="date_received" id="date_received"
+                                    value="{{ date('Y-m-d H:i:s') }}" disabled hidden>
                                 <input type="text" name="received_by" id="received_by" value="{{ Auth::user()->id }}"
                                     disabled hidden>
                                 <input type="hidden" name="forward_status" id="forward_status" value="Forwarded">
-                                <input type="hidden" name="button_cue" id="button_cue" value="">
                             </div>
                             <div class="card-footer">
                                 <a href="{{ URL::to('received-documents') }}" class="btn btn-danger">Back</a>

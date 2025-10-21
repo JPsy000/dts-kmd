@@ -14,7 +14,7 @@
                         <!--begin::Row-->
                         <div class="row">
                             <div class="col-sm-12">
-                                <h3 class="mb-0">Tracking History</h3>
+                                <h3 class="mb-0">Track Document</h3>
                             </div>
                         </div>
                         <!--end::Row-->
@@ -60,14 +60,15 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                @foreach ($track as $i => $search)
+                                                                @foreach ($track as $search)
                                                                     <tr>
                                                                         {{-- <td>{{ ($track->currentPage() - 1) * $track->perPage() + $i + 1 }}
                                                                             </td> --}}
-                                                                        <td>{{ $search->dms_no }}</td>
+                                                                        <td>{{ $search->DocTracks->dms_no }}</td>
                                                                         </td>
                                                                         <td>
-                                                                            <button class="btn btn-primary">Track</button>
+                                                                            <a href="{{ URL::to('track-history/' . $search->dms_no) }}"
+                                                                                class="btn btn-info btn-sm">View</a>
                                                                         </td>
                                                                     </tr>
                                                                 @endforeach

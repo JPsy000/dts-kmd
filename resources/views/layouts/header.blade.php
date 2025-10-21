@@ -25,17 +25,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <a class="nav-link" data-widget="navbar-search" href="{{ URL::to('completed-documents') }}"
+                        role="button">
                         <i class="bi bi-check-square-fill"></i>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-                        <i class="bi bi-list"></i>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-widget="navbar-search" href="#" role="button">
+                    <a class="nav-link" data-widget="navbar-search" href="{{ URL::to('track-document') }}"
+                        role="button">
                         <i class="bi bi-search"></i>
                     </a>
                 </li>

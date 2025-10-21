@@ -16,7 +16,16 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'phone_number', 'address', 'office_id', 'position_name', 'profile_picture', 'status', 'email', 'password',
+        'first_name',
+        'last_name',
+        'phone_number',
+        'address',
+        'office_id',
+        'position_id',
+        'profile_picture',
+        'status',
+        'email',
+        'password',
     ];
 
     /**
@@ -25,7 +34,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
@@ -49,6 +59,16 @@ class User extends Authenticatable
 
     public function positionToUsers()
     {
-        return $this->belongsTo(Positions::class, 'position_name', 'id');
+        return $this->belongsTo(Positions::class, 'position_id', 'id');
+    }
+
+    public function doc_track()
+    {
+        return $this->hasOne(DocTrack::class, 'received_by', 'id');
+    }
+
+    public function doc_track1()
+    {
+        return $this->hasOne(DocTrack::class, 'encoded_by', 'id');
     }
 }
